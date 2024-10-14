@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 3.22)
 project(oneDNNDemo)
 
 #set(ONEDNN_HOME "${PROJECT_SOURCE_DIR}/../oneDNN-3.5.3-O3NOSVE")
-set(ONEDNN_HOME "${PROJECT_SOURCE_DIR}/../oneDNN-3.5.3-O3SVE")
+#set(ONEDNN_HOME "${PROJECT_SOURCE_DIR}/../oneDNN-3.5.3-O3SVE")
+set(ONEDNN_HOME "${PROJECT_SOURCE_DIR}/oneDNN_install")
 
 include_directories("${ONEDNN_HOME}/include")
 include_directories("${PROJECT_SOURCE_DIR}")

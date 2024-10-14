@@ -4,4 +4,8 @@
 **/*.tmp
 .vscode/
 build/
+.build/
+CMakeFiles/
 cmake-build-*/
+*.tar.gz
+oneDNN_install/
