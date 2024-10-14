@@ -24,9 +24,9 @@ aarch64_sve.tar.gz :
 		&& wget https://github.com/DreamChaser-luzeyu/oneDNN_autobuild/releases/latest/download/build_jammy_arm64sve.tar.gz -O ./aarch64_sve.tar.gz \
 		|| echo "Not jammy"
 
-	@lsb_release -a | grep nobel \
+	@lsb_release -a | grep noble \
 		&& wget https://github.com/DreamChaser-luzeyu/oneDNN_autobuild/releases/latest/download/build_noble_arm64sve.tar.gz -O ./aarch64_sve.tar.gz \
-		|| echo "Not nobel"
+		|| echo "Not noble"
 
 amd64.tar.gz : 
 	cd $(dirname $0)
@@ -34,9 +34,9 @@ amd64.tar.gz :
 		&& wget https://github.com/DreamChaser-luzeyu/oneDNN_autobuild/releases/latest/download/build_jammy_amd64.tar.gz -O ./amd64.tar.gz \
 		|| echo "Not jammy"
 
-	@lsb_release -a | grep nobel \
+	@lsb_release -a | grep noble \
 		&& wget https://github.com/DreamChaser-luzeyu/oneDNN_autobuild/releases/latest/download/build_noble_amd64.tar.gz -O ./amd64.tar.gz \
-		|| echo "Not nobel"
+		|| echo "Not noble"
 
 test_matmul_aarch64nosve : test aarch64_nosve.tar.gz
 	@echo "Uncompressing..."
