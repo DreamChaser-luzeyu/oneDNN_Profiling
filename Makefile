@@ -1,4 +1,4 @@
-.PONY : test clean test_matmul_nosve test_amd64
+.PONY : test clean test_matmul_nosve test_matmul_aarch64sve test_matmul_aarch64sve_gcc13 test_amd64 test_naive_default
 
 clean : 
 	rm -rf ./*.tar.gz
@@ -89,3 +89,12 @@ test_matmul_amd64 : test amd64.tar.gz
 	cmake -S. -B./.build
 	cmake --build ./.build --target demo
 	./.build/demo < $(IN_FILE)
+
+test_naive_default : 
+	g++ ./profiling_naive.cpp -o ./naive && ./naive && rm ./naive
+
+test_naive_nosve : 
+	g++ ./profiling_naive.cpp -O3 -march=armv8-a+nosimd -o ./naive && ./naive && rm ./naive
+
+test_naive_sve : 
+	g++ ./profiling_naive.cpp -O3 -march=armv8-a+sve -o ./naive && ./naive && rm ./naive
