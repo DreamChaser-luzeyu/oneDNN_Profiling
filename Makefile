@@ -19,6 +19,15 @@ aarch64_nosve.tar.gz :
 		&& wget https://github.com/DreamChaser-luzeyu/oneDNN_autobuild/releases/latest/download/build_noble_arm64nosve.tar.gz -O ./aarch64_nosve.tar.gz \
 		|| echo "Not noble"
 
+aarch64_forcenosve.tar.gz :
+	@lsb_release -a | grep jammy \
+		&& wget https://github.com/DreamChaser-luzeyu/oneDNN_autobuild/releases/latest/download/build_jammy_arm64forcenosve.tar.gz -O ./aarch64_forcenosve.tar.gz \
+		|| echo "Not jammy"
+
+	@lsb_release -a | grep noble \
+		&& wget https://github.com/DreamChaser-luzeyu/oneDNN_autobuild/releases/latest/download/build_noble_arm64forcenosve.tar.gz -O ./aarch64_forcenosve.tar.gz \
+		|| echo "Not noble" 		
+
 aarch64_sve.tar.gz : 
 	@lsb_release -a | grep jammy \
 		&& wget https://github.com/DreamChaser-luzeyu/oneDNN_autobuild/releases/latest/download/build_jammy_arm64sve.tar.gz -O ./aarch64_sve.tar.gz \
@@ -57,6 +66,17 @@ test_matmul_aarch64nosve : test aarch64_nosve.tar.gz
 	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
 	cmake --build ./.build --target demo
 	./.build/demo < $(IN_FILE)
+
+test_matmul_aarch64forcenosve : test aarch64_forcenosve.tar.gz
+	@echo "Uncompressing..."
+	tar -zxf ./aarch64_forcenosve.tar.gz
+	if [ -d "./oneDNN_install" ]; then rm -rf ./oneDNN_install; fi
+	mv ./install ./oneDNN_install
+	if [ -d "./.build" ]; then rm -rf ./.build; fi
+	mkdir ./.build
+	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
+	cmake --build ./.build --target demo
+	./.build/demo < $(IN_FILE)	
 
 test_matmul_aarch64sve : test aarch64_sve.tar.gz
 	@echo "Uncompressing..."
