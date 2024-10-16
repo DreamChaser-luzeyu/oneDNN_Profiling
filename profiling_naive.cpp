@@ -18,7 +18,7 @@ using std::endl;
 using std::chrono::duration_cast;
 using std::chrono::microseconds;
 
-void fun(double *a, double *b, int size) {
+void __attribute__ ((noinline)) fun(double *a, double *b, int size) {
     for (int i = 0; i < size; ++i) {
         b[i] += a[i];
     }
