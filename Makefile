@@ -54,7 +54,7 @@ test_matmul_aarch64nosve : test aarch64_nosve.tar.gz
 	mv ./install ./oneDNN_install
 	if [ -d "./.build" ]; then rm -rf ./.build; fi
 	mkdir ./.build
-	cmake -S. -B./.build
+	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
 	cmake --build ./.build --target demo
 	./.build/demo < $(IN_FILE)
 
@@ -65,7 +65,7 @@ test_matmul_aarch64sve : test aarch64_sve.tar.gz
 	mv ./install ./oneDNN_install
 	if [ -d "./.build" ]; then rm -rf ./.build; fi
 	mkdir ./.build
-	cmake -S. -B./.build
+	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
 	cmake --build ./.build --target demo
 	./.build/demo < $(IN_FILE)
 
@@ -76,7 +76,7 @@ test_matmul_aarch64sve_gcc13 : test aarch64_sve_gcc13.tar.gz
 	mv ./install ./oneDNN_install
 	if [ -d "./.build" ]; then rm -rf ./.build; fi
 	mkdir ./.build
-	cmake -S. -B./.build
+	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
 	cmake --build ./.build --target demo
 	./.build/demo < $(IN_FILE)	
 
@@ -87,7 +87,7 @@ test_matmul_amd64 : test amd64.tar.gz
 	mv ./install ./oneDNN_install
 	if [ -d "./.build" ]; then rm -rf ./.build; fi
 	mkdir ./.build
-	cmake -S. -B./.build
+	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
 	cmake --build ./.build --target demo
 	./.build/demo < $(IN_FILE)
 
