@@ -99,4 +99,4 @@ test_naive_nosve :
 	
 test_naive_sve : 
 	g++ ./profiling_naive.cpp -O3 -march=armv8-a+sve -fopt-info-vec -o ./naive.exe && ./naive.exe
-	qemu-aarch64 -cpu max,sve=off
+	qemu-aarch64 -cpu max,sve=off ./naive.exe
