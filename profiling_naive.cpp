@@ -5,7 +5,7 @@
 #include <iostream>
 
 #ifndef VEC_SIZE
-#define VEC_SIZE 127
+#define VEC_SIZE 128
 #endif
 
 #ifndef VEC_NUM
