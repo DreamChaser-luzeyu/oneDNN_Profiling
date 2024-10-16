@@ -95,11 +95,11 @@ test_naive_default :
 	g++ ./profiling_naive.cpp -o ./naive.exe && ./naive.exe && rm ./naive.exe
 
 test_naive_nosve : 
-	g++ ./profiling_naive.cpp -O3 -march=armv8-a+nosimd -o ./naive.exe && ./naive.exe 
+	g++ ./profiling_naive.cpp -O3 -march=armv8-a+nosimd -ggdb3 -o ./naive.exe && ./naive.exe 
 #   Should work	
 	qemu-aarch64 -cpu max,sve=off ./naive.exe
 
 test_naive_sve : 
-	g++ ./profiling_naive.cpp -O3 -march=armv8-a+sve -fopt-info-vec -o ./naive-sve.exe && ./naive-sve.exe
+	g++ ./profiling_naive.cpp -O3 -march=armv8-a+sve -fopt-info-vec -ggdb3 -o ./naive-sve.exe && ./naive-sve.exe
 #   Illegal instruction is expected here
 	qemu-aarch64 -cpu max,sve=off ./naive-sve.exe
