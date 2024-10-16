@@ -1,10 +1,15 @@
-#include <iostream>
-#include <chrono>
-#include <cstdio>
 #include <stdlib.h>
 
-#ifndef SIZE
-#define SIZE 127
+#include <chrono>
+#include <cstdio>
+#include <iostream>
+
+#ifndef VEC_SIZE
+#define VEC_SIZE 127
+#endif
+
+#ifndef VEC_NUM
+#define VEC_NUM 819200
 #endif
 
 using std::cin;
@@ -13,7 +18,7 @@ using std::endl;
 using std::chrono::duration_cast;
 using std::chrono::microseconds;
 
-void fun(double * a, double * b, int size) {
+void fun(double *a, double *b, int size) {
     for (int i = 0; i < size; ++i) {
         b[i] += a[i];
     }
@@ -25,11 +30,11 @@ void fun(double * a, double * b, int size) {
 int main() {
     int i;
 
-    double *a = (double *)malloc(sizeof(double) * SIZE);
-    double *b = (double *)malloc(sizeof(double) * SIZE);
+    double *a = (double *)malloc(sizeof(double) * VEC_SIZE);
+    double *b = (double *)malloc(sizeof(double) * VEC_SIZE);
 
     auto start = std::chrono::system_clock::now();
-    for(int i=0; i<204800; i++) fun(a, b, SIZE);
+    for (int i = 0; i < VEC_NUM; i++) fun(a, b, VEC_SIZE);
     auto end = std::chrono::system_clock::now();
     auto duration = end - start;
     cout << "Calculation costs "
