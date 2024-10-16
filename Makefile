@@ -4,6 +4,7 @@ clean :
 	rm -rf ./*.tar.gz
 	rm -rf ./.build
 	rm -rf ./oneDNN_install
+	rm -rf ./*.exe
 	
 test :
 	echo $(pwd)
@@ -91,10 +92,11 @@ test_matmul_amd64 : test amd64.tar.gz
 	./.build/demo < $(IN_FILE)
 
 test_naive_default : 
-	g++ ./profiling_naive.cpp -o ./naive && ./naive && rm ./naive
+	g++ ./profiling_naive.cpp -o ./naive.exe && ./naive.exe && rm ./naive.exe
 
 test_naive_nosve : 
-	g++ ./profiling_naive.cpp -O3 -march=armv8-a+nosimd -o ./naive && ./naive && rm ./naive
-
+	g++ ./profiling_naive.cpp -O3 -march=armv8-a+nosimd -o ./naive.exe && ./naive.exe 
+	
 test_naive_sve : 
-	g++ ./profiling_naive.cpp -O3 -march=armv8-a+sve -o ./naive && ./naive && rm ./naive
+	g++ ./profiling_naive.cpp -O3 -march=armv8-a+sve -fopt-info-vec -o ./naive.exe && ./naive.exe
+	qemu-aarch64 -cpu max,sve=off

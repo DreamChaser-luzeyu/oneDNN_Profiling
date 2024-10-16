@@ -9,3 +9,5 @@ CMakeFiles/
 cmake-build-*/
 *.tar.gz
 oneDNN_install/
+*.exe
+**/*.exe
