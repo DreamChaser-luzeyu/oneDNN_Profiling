@@ -190,11 +190,11 @@ void depthwise_convolution_example(dnnl::engine::kind engine_kind) {
     const memory::dim N = 3, // batch size
             G = 32, // channel groups
             IC = 32, // input channels
-            IH = 512, // input height
-            IW = 512, // input width
+            IH = 768, // input height
+            IW = 768, // input width
             OC = 32, // output channels
-            KH = 1, // weights height
-            KW = 1, // weights width
+            KH = 4, // weights height
+            KW = 4, // weights width
             PH_L = 1, // height padding: left
             PH_R = 1, // height padding: right
             PW_L = 1, // width padding: left
