@@ -12,11 +12,11 @@ test :
 aarch64_nosve.tar.gz : 
 	cd $(dirname $0)
 	@lsb_release -a | grep jammy \
-		&& wget https://github.com/DreamChaser-luzeyu/oneDNN_autobuild/releases/latest/download/build_jammy_arm64nosve.tar.gz -O ./aarch64_nosve.tar.gz \
+		&& wget https://github.com/DreamChaser-luzeyu/oneDNN_autobuild/releases/download/SHA-a93e56be/build_jammy_arm64nosve.tar.gz -O ./aarch64_nosve.tar.gz \
 		|| echo "Not jammy"
 
 	@lsb_release -a | grep noble \
-		&& wget https://github.com/DreamChaser-luzeyu/oneDNN_autobuild/releases/latest/download/build_noble_arm64nosve.tar.gz -O ./aarch64_nosve.tar.gz \
+		&& wget https://github.com/DreamChaser-luzeyu/oneDNN_autobuild/releases/download/SHA-a93e56be/build_noble_arm64nosve.tar.gz -O ./aarch64_nosve.tar.gz \
 		|| echo "Not noble"
 
 aarch64_forcenosimd.tar.gz :
