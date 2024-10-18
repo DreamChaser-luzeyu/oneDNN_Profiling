@@ -39,11 +39,11 @@ aarch64_forcenosve.tar.gz :
 
 aarch64_sve.tar.gz : 
 	@lsb_release -a | grep jammy \
-		&& wget https://github.com/DreamChaser-luzeyu/oneDNN_autobuild/releases/latest/download/build_jammy_arm64sve.tar.gz -O ./aarch64_sve.tar.gz \
+		&& wget https://github.com/DreamChaser-luzeyu/oneDNN_autobuild/releases/download/SHA-a526d176/build_jammy_arm64sve.tar.gz -O ./aarch64_sve.tar.gz \
 		|| echo "Not jammy"
 
 	@lsb_release -a | grep noble \
-		&& wget https://github.com/DreamChaser-luzeyu/oneDNN_autobuild/releases/latest/download/build_noble_arm64sve.tar.gz -O ./aarch64_sve.tar.gz \
+		&& wget https://github.com/DreamChaser-luzeyu/oneDNN_autobuild/releases/download/SHA-a526d176/build_noble_arm64sve.tar.gz -O ./aarch64_sve.tar.gz \
 		|| echo "Not noble"
 
 aarch64_sve_gcc13.tar.gz :		
@@ -111,7 +111,7 @@ test_matmul_aarch64sve : test aarch64_sve.tar.gz
 
 test_matmul_aarch64sve_gcc13 : test aarch64_sve_gcc13.tar.gz
 	@echo "Uncompressing..."
-	tar -zxf ./aarch64_sve.tar.gz
+	tar -zxf ./aarch64_sve_gcc13.tar.gz
 	if [ -d "./oneDNN_install" ]; then rm -rf ./oneDNN_install; fi
 	mv ./install ./oneDNN_install
 	if [ -d "./.build" ]; then rm -rf ./.build; fi
