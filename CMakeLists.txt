@@ -7,8 +7,12 @@ include_directories("${ONEDNN_HOME}/include")
 include_directories("${PROJECT_SOURCE_DIR}")
 
 add_executable(matmul profiling_matmul.cpp)
+add_executable(softmax profiling_softmax.cpp)
+add_executable(relu profiling_eltwiserelu.cpp)
 
 
 # add_executable(demo profiling_conv.cpp)
 
 target_link_libraries(matmul "${ONEDNN_HOME}/lib/libdnnl.so")
+target_link_libraries(softmax "${ONEDNN_HOME}/lib/libdnnl.so")
+target_link_libraries(relu "${ONEDNN_HOME}/lib/libdnnl.so")
