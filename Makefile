@@ -35,6 +35,46 @@ matmul_sve : oneDNN_sve.tar.gz
 	cmake --build ./.build --target matmul
 	./.build/demo < $(IN_FILE)
 
+softmax_nosve : oneDNN_nosve.tar.gz
+	tar -zxf ./oneDNN_nosve.tar.gz
+	if [ -d "./oneDNN_install" ]; then rm -rf ./oneDNN_install; fi
+	mv ./install ./oneDNN_install
+	if [ -d "./.build" ]; then rm -rf ./.build; fi
+	mkdir ./.build
+	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
+	cmake --build ./.build --target softmax
+	./.build/demo < $(IN_FILE)
+
+softmax_sve : oneDNN_sve.tar.gz
+	tar -zxf ./oneDNN_sve.tar.gz
+	if [ -d "./oneDNN_install" ]; then rm -rf ./oneDNN_install; fi
+	mv ./install ./oneDNN_install
+	if [ -d "./.build" ]; then rm -rf ./.build; fi
+	mkdir ./.build
+	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
+	cmake --build ./.build --target softmax
+	./.build/demo < $(IN_FILE)
+
+relu_nosve : oneDNN_nosve.tar.gz
+	tar -zxf ./oneDNN_nosve.tar.gz
+	if [ -d "./oneDNN_install" ]; then rm -rf ./oneDNN_install; fi
+	mv ./install ./oneDNN_install
+	if [ -d "./.build" ]; then rm -rf ./.build; fi
+	mkdir ./.build
+	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
+	cmake --build ./.build --target relu
+	./.build/demo < $(IN_FILE)
+
+relu_sve : oneDNN_sve.tar.gz
+	tar -zxf ./oneDNN_sve.tar.gz
+	if [ -d "./oneDNN_install" ]; then rm -rf ./oneDNN_install; fi
+	mv ./install ./oneDNN_install
+	if [ -d "./.build" ]; then rm -rf ./.build; fi
+	mkdir ./.build
+	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
+	cmake --build ./.build --target relu
+	./.build/demo < $(IN_FILE)	
+
 matmul_amd64 : oneDNN_amd64.tar.gz
 	tar -zxf ./oneDNN_amd64.tar.gz
 	if [ -d "./oneDNN_install" ]; then rm -rf ./oneDNN_install; fi
