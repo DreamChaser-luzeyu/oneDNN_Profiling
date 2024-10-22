@@ -7,10 +7,10 @@ clean :
 	rm -rf ./*.exe
 
 oneDNN_nosve.tar.gz : 
-	wget https://app.dreamchaser-luzeyu.cn/caalist/d/StaticFiles/study/oneDNN_noble_aarch64_armv8-a_nosimd_o3_rel_isa_undef.tar.gz -O ./oneDNN_nosve.tar.gz
+	wget https://app.dreamchaser-luzeyu.cn/caalist/d/StaticFiles/study/oneDNN_jammy_aarch64_armv8-a_nosimd_o3_rel_isa_undef.tar.gz -O ./oneDNN_nosve.tar.gz
 
 oneDNN_sve.tar.gz : 
-	wget https://app.dreamchaser-luzeyu.cn/caalist/d/StaticFiles/study/oneDNN_noble_aarch64_armv8-a_sve_o3_rel_auto.tar.gz -O ./oneDNN_sve.tar.gz
+	wget https://app.dreamchaser-luzeyu.cn/caalist/d/StaticFiles/study/oneDNN_jammy_aarch64_armv8-a_sve_o3_rel_auto.tar.gz -O ./oneDNN_sve.tar.gz
 
 oneDNN_amd64.tar.gz : 
 	wget https://github.com/DreamChaser-luzeyu/oneDNN_autobuild/releases/download/SHA-a526d176/build_jammy_amd64.tar.gz -O ./oneDNN_amd64.tar.gz
