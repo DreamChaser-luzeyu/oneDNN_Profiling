@@ -47,7 +47,7 @@ void eltwise_example(dnnl::engine::kind engine_kind) {
             IH = 227, // tensor height
             IW = 227; // tensor width
 
-    std::cout << "Please enter param N(Batch size), IC, IH, IW:";
+    std::cout << "[RELU] Please enter param N(Batch size), IC, IH, IW:";
     std::cin >> N >> IC >> IH >> IW;
     
     // Source (src) and destination (dst) tensors dimensions.

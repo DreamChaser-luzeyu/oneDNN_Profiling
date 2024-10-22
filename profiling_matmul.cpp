@@ -30,7 +30,7 @@ int main() {
 
     // 2---- Get matrix size
     int m, k, n;
-    cout << "Please enter param m, k, n:";
+    cout << "[MATMUL] Please enter param m, k, n:";
     cin >> m >> k >> n;
 
     // 3---- Initialize matrix structs

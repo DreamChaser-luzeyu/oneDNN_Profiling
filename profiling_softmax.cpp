@@ -44,7 +44,7 @@ void softmax_example(dnnl::engine::kind engine_kind) {
     // Tensor dimensions.
     memory::dim N = 3, // batch size
             IC = 1000; // channels
-    std::cout << "Please enter param N(Batch size), IC(Channel size): ";
+    std::cout << "[SOFTMAX] Please enter param N(Batch size), IC(Channel size): ";
     std::cin >> N >> IC;
     // Source (src) and destination (dst) tensors dimensions.
     memory::dims src_dims = {N, IC};
