@@ -23,7 +23,7 @@ matmul_nosve : oneDNN_nosve.tar.gz
 	mkdir ./.build
 	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
 	cmake --build ./.build --target matmul
-	./.build/demo < $(IN_FILE)
+	./.build/matmul < $(IN_FILE)
 
 matmul_sve : oneDNN_sve.tar.gz
 	tar -zxf ./oneDNN_sve.tar.gz
@@ -33,7 +33,7 @@ matmul_sve : oneDNN_sve.tar.gz
 	mkdir ./.build
 	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
 	cmake --build ./.build --target matmul
-	./.build/demo < $(IN_FILE)
+	./.build/matmul < $(IN_FILE)
 
 softmax_nosve : oneDNN_nosve.tar.gz
 	tar -zxf ./oneDNN_nosve.tar.gz
@@ -43,7 +43,7 @@ softmax_nosve : oneDNN_nosve.tar.gz
 	mkdir ./.build
 	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
 	cmake --build ./.build --target softmax
-	./.build/demo < $(IN_FILE)
+	./.build/softmax < $(IN_FILE)
 
 softmax_sve : oneDNN_sve.tar.gz
 	tar -zxf ./oneDNN_sve.tar.gz
@@ -53,7 +53,7 @@ softmax_sve : oneDNN_sve.tar.gz
 	mkdir ./.build
 	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
 	cmake --build ./.build --target softmax
-	./.build/demo < $(IN_FILE)
+	./.build/softmax < $(IN_FILE)
 
 relu_nosve : oneDNN_nosve.tar.gz
 	tar -zxf ./oneDNN_nosve.tar.gz
@@ -63,7 +63,7 @@ relu_nosve : oneDNN_nosve.tar.gz
 	mkdir ./.build
 	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
 	cmake --build ./.build --target relu
-	./.build/demo < $(IN_FILE)
+	./.build/relu < $(IN_FILE)
 
 relu_sve : oneDNN_sve.tar.gz
 	tar -zxf ./oneDNN_sve.tar.gz
@@ -73,7 +73,7 @@ relu_sve : oneDNN_sve.tar.gz
 	mkdir ./.build
 	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
 	cmake --build ./.build --target relu
-	./.build/demo < $(IN_FILE)	
+	./.build/relu < $(IN_FILE)	
 
 matmul_amd64 : oneDNN_amd64.tar.gz
 	tar -zxf ./oneDNN_amd64.tar.gz
@@ -83,7 +83,7 @@ matmul_amd64 : oneDNN_amd64.tar.gz
 	mkdir ./.build
 	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
 	cmake --build ./.build --target matmul
-	./.build/demo < $(IN_FILE)	
+	./.build/matmul < $(IN_FILE)	
 
 softmax_amd64 : oneDNN_amd64.tar.gz
 	tar -zxf ./oneDNN_amd64.tar.gz
@@ -93,7 +93,7 @@ softmax_amd64 : oneDNN_amd64.tar.gz
 	mkdir ./.build
 	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
 	cmake --build ./.build --target softmax
-	./.build/demo < $(IN_FILE)	
+	./.build/matmul < $(IN_FILE)	
 
 relu_amd64 : oneDNN_amd64.tar.gz
 	tar -zxf ./oneDNN_amd64.tar.gz
@@ -103,4 +103,4 @@ relu_amd64 : oneDNN_amd64.tar.gz
 	mkdir ./.build
 	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
 	cmake --build ./.build --target relu
-	./.build/demo < $(IN_FILE)	
+	./.build/relu < $(IN_FILE)	
