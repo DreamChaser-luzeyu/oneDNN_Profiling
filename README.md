@@ -23,9 +23,9 @@ IN_FILE="$(pwd)/input/matsum.in" taskset -c 1 make matsum_asimd | grep LOG
 IN_FILE="$(pwd)/input/matsum.in" taskset -c 1 make matsum_sve | grep LOG
 
 # Softmax
-IN_FILE="$(pwd)/input/softmax.in" taskset -c 1 make softmax_nosve | grep LOG
-IN_FILE="$(pwd)/input/softmax.in" taskset -c 1 make softmax_asimd | grep LOG
-IN_FILE="$(pwd)/input/softmax.in" taskset -c 1 make softmax_sve | grep LOG
+IN_FILE="$(pwd)/input/softmax_2.in" taskset -c 1 make softmax_nosve | grep LOG
+IN_FILE="$(pwd)/input/softmax_2.in" taskset -c 1 make softmax_asimd | grep LOG
+IN_FILE="$(pwd)/input/softmax_2.in" taskset -c 1 make softmax_sve | grep LOG
 
 # ReLU
 IN_FILE="$(pwd)/input/relu.in" taskset -c 1 make relu_nosve | grep Calculation
