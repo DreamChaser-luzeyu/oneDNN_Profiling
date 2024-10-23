@@ -35,6 +35,26 @@ matmul_sve : oneDNN_sve.tar.gz
 	cmake --build ./.build --target matmul
 	./.build/matmul < $(IN_FILE)
 
+batchmm_nosve : oneDNN_nosve.tar.gz
+	tar -zxf ./oneDNN_nosve.tar.gz
+	if [ -d "./oneDNN_install" ]; then rm -rf ./oneDNN_install; fi
+	mv ./install ./oneDNN_install
+	if [ -d "./.build" ]; then rm -rf ./.build; fi
+	mkdir ./.build
+	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
+	cmake --build ./.build --target batchmm
+	./.build/batchmm < $(IN_FILE)
+
+batchmm_sve : oneDNN_sve.tar.gz
+	tar -zxf ./oneDNN_sve.tar.gz
+	if [ -d "./oneDNN_install" ]; then rm -rf ./oneDNN_install; fi
+	mv ./install ./oneDNN_install
+	if [ -d "./.build" ]; then rm -rf ./.build; fi
+	mkdir ./.build
+	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
+	cmake --build ./.build --target batchmm
+	./.build/batchmm < $(IN_FILE)
+
 softmax_nosve : oneDNN_nosve.tar.gz
 	tar -zxf ./oneDNN_nosve.tar.gz
 	if [ -d "./oneDNN_install" ]; then rm -rf ./oneDNN_install; fi
@@ -67,36 +87,6 @@ relu_nosve : oneDNN_nosve.tar.gz
 
 relu_sve : oneDNN_sve.tar.gz
 	tar -zxf ./oneDNN_sve.tar.gz
-	if [ -d "./oneDNN_install" ]; then rm -rf ./oneDNN_install; fi
-	mv ./install ./oneDNN_install
-	if [ -d "./.build" ]; then rm -rf ./.build; fi
-	mkdir ./.build
-	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
-	cmake --build ./.build --target relu
-	./.build/relu < $(IN_FILE)	
-
-matmul_amd64 : oneDNN_amd64.tar.gz
-	tar -zxf ./oneDNN_amd64.tar.gz
-	if [ -d "./oneDNN_install" ]; then rm -rf ./oneDNN_install; fi
-	mv ./install ./oneDNN_install
-	if [ -d "./.build" ]; then rm -rf ./.build; fi
-	mkdir ./.build
-	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
-	cmake --build ./.build --target matmul
-	./.build/matmul < $(IN_FILE)	
-
-softmax_amd64 : oneDNN_amd64.tar.gz
-	tar -zxf ./oneDNN_amd64.tar.gz
-	if [ -d "./oneDNN_install" ]; then rm -rf ./oneDNN_install; fi
-	mv ./install ./oneDNN_install
-	if [ -d "./.build" ]; then rm -rf ./.build; fi
-	mkdir ./.build
-	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
-	cmake --build ./.build --target softmax
-	./.build/matmul < $(IN_FILE)	
-
-relu_amd64 : oneDNN_amd64.tar.gz
-	tar -zxf ./oneDNN_amd64.tar.gz
 	if [ -d "./oneDNN_install" ]; then rm -rf ./oneDNN_install; fi
 	mv ./install ./oneDNN_install
 	if [ -d "./.build" ]; then rm -rf ./.build; fi
