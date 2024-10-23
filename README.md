@@ -15,26 +15,21 @@ For silent monochrome test
 
 # Batch matmul 16 16*16 16*16 matmul, dump result
 IN_FILE="$(pwd)/input/batchmm_3.in" taskset -c 1 make batchmm_nosve | grep LOG
-# IN_FILE="$(pwd)/input/batchmm_3.in" taskset -c 1 make batchmm_asimd | grep LOG
 IN_FILE="$(pwd)/input/batchmm_3.in" taskset -c 1 make batchmm_sve | grep LOG
-diff ./batchmm.out.nosimd ./batchmm.out.sve
+diff ./batchmm.out.nosimd ./batchmm.out.sve && echo "Result identical"
 # Batch matmul 128 128*128 128*128 matmul, no dump result 
 IN_FILE="$(pwd)/input/batchmm.in" taskset -c 1 make batchmm_nodump_nosve | grep LOG
-# IN_FILE="$(pwd)/input/batchmm.in" taskset -c 1 make batchmm_nodump_asimd | grep LOG
 IN_FILE="$(pwd)/input/batchmm.in" taskset -c 1 make batchmm_nodump_sve | grep LOG
 # Batch matmul 110 110*110 110*110 matmul, no dump result
 IN_FILE="$(pwd)/input/batchmm_2.in" taskset -c 1 make batchmm_nodump_nosve | grep LOG
-# IN_FILE="$(pwd)/input/batchmm_2.in" taskset -c 1 make batchmm_asimd | grep LOG
 IN_FILE="$(pwd)/input/batchmm_2.in" taskset -c 1 make batchmm_nodump_sve | grep LOG
 
 # Softmax, dump result
 IN_FILE="$(pwd)/input/softmax_2.in" taskset -c 1 make softmax_nosve | grep LOG
-# IN_FILE="$(pwd)/input/softmax_2.in" taskset -c 1 make softmax_asimd | grep LOG
 IN_FILE="$(pwd)/input/softmax_2.in" taskset -c 1 make softmax_sve | grep LOG
-diff ./softmax.out.nosimd ./softmax.out.sve
+diff ./softmax.out.nosimd ./softmax.out.sve && echo "Result identical"
 # Softmax, no dump result
 IN_FILE="$(pwd)/input/softmax.in" taskset -c 1 make softmax_nodump_nosve | grep LOG
-# IN_FILE="$(pwd)/input/softmax.in" taskset -c 1 make softmax_nodump_asimd | grep LOG
 IN_FILE="$(pwd)/input/softmax.in" taskset -c 1 make softmax_nodump_sve | grep LOG
 
 # ReLU
