@@ -20,6 +20,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <chrono>
 
 #include "example_utils.hpp"
 #include "oneapi/dnnl/dnnl.hpp"
@@ -28,6 +29,9 @@ using namespace dnnl;
 
 using tag = memory::format_tag;
 using dt = memory::data_type;
+
+using std::chrono::duration_cast;
+using std::chrono::microseconds;
 
 void sum_example(dnnl::engine::kind engine_kind) {
 
@@ -38,10 +42,13 @@ void sum_example(dnnl::engine::kind engine_kind) {
     dnnl::stream engine_stream(engine);
 
     // Tensor dimensions.
-    const memory::dim N = 3, // batch size
+    memory::dim N = 3, // batch size
             IC = 3, // channels
             IH = 227, // tensor height
             IW = 227; // tensor width
+
+    std::cout << "[MATSUM] Please enter param N(Batch size), IC(Channel size), IH, IW: ";
+    std::cin >> N >> IC >> IH >> IW;
 
     // Source (src) and destination (dst) tensors dimensions.
     memory::dims src_dims = {N, IC, IH, IW};
@@ -95,11 +102,18 @@ void sum_example(dnnl::engine::kind engine_kind) {
         sum_args.insert({DNNL_ARG_MULTIPLE_SRC + n, src_mem[n]});
     }
 
+    std::cout << "Start calculation" << std::endl;
+    auto start = std::chrono::system_clock::now();
     // Primitive execution: sum.
     sum_prim.execute(engine_stream, sum_args);
-
     // Wait for the computation to finalize.
     engine_stream.wait();
+    auto end = std::chrono::system_clock::now();
+    auto duration = end - start;
+    std::cout << "Calculation costs "
+         << duration_cast<microseconds>(duration).count() << " microseconds"
+         << std::endl;
+
 
     // Read data from memory object's handle.
     read_from_dnnl_memory(dst_data.data(), dst_mem);

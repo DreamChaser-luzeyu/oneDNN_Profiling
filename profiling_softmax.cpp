@@ -51,9 +51,6 @@ void softmax_example(dnnl::engine::kind engine_kind) {
 
     // Allocate buffer.
     std::vector<float> src_data(product(src_dims));
-    std::cout << "Would you like to specify data(Y/n):";
-    char choice;
-    std::cin >> choice;
     std::generate(src_data.begin(), src_data.end(), []() {
         static int i = 0;
         return std::cos(i++ / 10.f);
