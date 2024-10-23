@@ -17,6 +17,7 @@ For silent monochrome test
 IN_FILE="$(pwd)/input/batchmm_3.in" taskset -c 1 make batchmm_nosve | grep LOG
 # IN_FILE="$(pwd)/input/batchmm_3.in" taskset -c 1 make batchmm_asimd | grep LOG
 IN_FILE="$(pwd)/input/batchmm_3.in" taskset -c 1 make batchmm_sve | grep LOG
+diff ./batchmm.out.nosimd ./batchmm.out.sve
 # Batch matmul 128 128*128 128*128 matmul, no dump result 
 IN_FILE="$(pwd)/input/batchmm.in" taskset -c 1 make batchmm_nodump_nosve | grep LOG
 # IN_FILE="$(pwd)/input/batchmm.in" taskset -c 1 make batchmm_nodump_asimd | grep LOG
@@ -30,6 +31,7 @@ IN_FILE="$(pwd)/input/batchmm_2.in" taskset -c 1 make batchmm_nodump_sve | grep 
 IN_FILE="$(pwd)/input/softmax_2.in" taskset -c 1 make softmax_nosve | grep LOG
 # IN_FILE="$(pwd)/input/softmax_2.in" taskset -c 1 make softmax_asimd | grep LOG
 IN_FILE="$(pwd)/input/softmax_2.in" taskset -c 1 make softmax_sve | grep LOG
+diff ./softmax.out.nosimd ./softmax.out.sve
 # Softmax, no dump result
 IN_FILE="$(pwd)/input/softmax.in" taskset -c 1 make softmax_nodump_nosve | grep LOG
 # IN_FILE="$(pwd)/input/softmax.in" taskset -c 1 make softmax_nodump_asimd | grep LOG

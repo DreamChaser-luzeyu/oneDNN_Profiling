@@ -5,6 +5,8 @@ clean :
 	rm -rf ./.build
 	rm -rf ./oneDNN_install
 	rm -rf ./*.exe
+	rm -rf ./softmax.out.*
+	rm -rf ./batchmm.out.*
 
 oneDNN_nosve.tar.gz : 
 	wget https://app.dreamchaser-luzeyu.cn/caalist/d/StaticFiles/study/oneDNN_jammy_aarch64_armv8-a_nosimd_o3_rel_isa_undef.tar.gz -O ./oneDNN_nosve.tar.gz
