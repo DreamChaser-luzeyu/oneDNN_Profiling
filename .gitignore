@@ -12,3 +12,5 @@ cmake-build-*/
 oneDNN_install/
 *.exe
 **/*.exe
+batchmm.out*
+softmax.out*

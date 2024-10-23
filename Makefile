@@ -18,26 +18,6 @@ oneDNN_asimd.tar.gz :
 oneDNN_amd64.tar.gz : 
 	wget https://github.com/DreamChaser-luzeyu/oneDNN_autobuild/releases/download/SHA-a526d176/build_jammy_amd64.tar.gz -O ./oneDNN_amd64.tar.gz
 
-matmul_nosve : oneDNN_nosve.tar.gz
-	tar -zxf ./oneDNN_nosve.tar.gz
-	if [ -d "./oneDNN_install" ]; then rm -rf ./oneDNN_install; fi
-	mv ./install ./oneDNN_install
-	if [ -d "./.build" ]; then rm -rf ./.build; fi
-	mkdir ./.build
-	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
-	cmake --build ./.build --target matmul
-	./.build/matmul < $(IN_FILE)
-
-matmul_sve : oneDNN_sve.tar.gz
-	tar -zxf ./oneDNN_sve.tar.gz
-	if [ -d "./oneDNN_install" ]; then rm -rf ./oneDNN_install; fi
-	mv ./install ./oneDNN_install
-	if [ -d "./.build" ]; then rm -rf ./.build; fi
-	mkdir ./.build
-	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
-	cmake --build ./.build --target matmul
-	./.build/matmul < $(IN_FILE)
-
 batchmm_sve : oneDNN_sve.tar.gz
 	tar -zxf ./oneDNN_sve.tar.gz
 	if [ -d "./oneDNN_install" ]; then rm -rf ./oneDNN_install; fi
@@ -46,7 +26,7 @@ batchmm_sve : oneDNN_sve.tar.gz
 	mkdir ./.build
 	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
 	cmake --build ./.build --target batchmm
-	./.build/batchmm < $(IN_FILE)
+	BUILD_ARCH="sve" ./.build/batchmm < $(IN_FILE)
 
 batchmm_asimd : oneDNN_asimd.tar.gz
 	tar -zxf ./oneDNN_asimd.tar.gz
@@ -56,7 +36,7 @@ batchmm_asimd : oneDNN_asimd.tar.gz
 	mkdir ./.build
 	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
 	cmake --build ./.build --target batchmm
-	./.build/batchmm < $(IN_FILE)
+	BUILD_ARCH="asimd" ./.build/batchmm < $(IN_FILE)
 
 batchmm_nosve : oneDNN_nosve.tar.gz
 	tar -zxf ./oneDNN_nosve.tar.gz
@@ -66,7 +46,7 @@ batchmm_nosve : oneDNN_nosve.tar.gz
 	mkdir ./.build
 	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
 	cmake --build ./.build --target batchmm
-	./.build/batchmm < $(IN_FILE)
+	BUILD_ARCH="nosimd" ./.build/batchmm < $(IN_FILE)
 
 matsum_sve : oneDNN_sve.tar.gz
 	tar -zxf ./oneDNN_sve.tar.gz
@@ -106,7 +86,7 @@ softmax_nosve : oneDNN_nosve.tar.gz
 	mkdir ./.build
 	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
 	cmake --build ./.build --target softmax
-	./.build/softmax < $(IN_FILE)
+	BUILD_ARCH="nosimd" ./.build/softmax < $(IN_FILE)
 
 softmax_asimd : oneDNN_asimd.tar.gz
 	tar -zxf ./oneDNN_asimd.tar.gz
@@ -116,7 +96,7 @@ softmax_asimd : oneDNN_asimd.tar.gz
 	mkdir ./.build
 	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
 	cmake --build ./.build --target softmax
-	./.build/softmax < $(IN_FILE)
+	BUILD_ARCH="asimd" ./.build/softmax < $(IN_FILE)
 
 softmax_sve : oneDNN_sve.tar.gz
 	tar -zxf ./oneDNN_sve.tar.gz
@@ -126,7 +106,7 @@ softmax_sve : oneDNN_sve.tar.gz
 	mkdir ./.build
 	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
 	cmake --build ./.build --target softmax
-	./.build/softmax < $(IN_FILE)
+	BUILD_ARCH="sve" ./.build/softmax < $(IN_FILE)
 
 relu_nosve : oneDNN_nosve.tar.gz
 	tar -zxf ./oneDNN_nosve.tar.gz

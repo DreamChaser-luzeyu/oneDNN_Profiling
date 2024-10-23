@@ -17,10 +17,12 @@
 
 #include <algorithm>
 #include <cmath>
+#include <cstdlib>
 #include <iostream>
 #include <string>
 #include <vector>
 #include <chrono>
+#include <fstream>
 
 #include "example_utils.hpp"
 #include "oneapi/dnnl/dnnl.hpp"
@@ -90,15 +92,30 @@ void softmax_example(dnnl::engine::kind engine_kind) {
 
     auto end = std::chrono::system_clock::now();
     auto duration = end - start;
-    std::cout << "Calculation costs "
+    std::cout << "[LOG] Calculation costs "
          << duration_cast<microseconds>(duration).count() << " microseconds"
          << std::endl;
 
     // Read data from memory object's handle.
     read_from_dnnl_memory(src_data.data(), src_mem);
+
+    std::cout << "[LOG] Dumping result..." << std::endl;
+
+    char str_buf[128];
+    char* build_arch_str = getenv("BUILD_ARCH");
+    strcpy(str_buf, "softmax.out.");
+    const char* file_name_str = strcat(str_buf, build_arch_str);
+    std::fstream f;
+    f.open(file_name_str, std::ios::out);
+    for(int i=0; i<src_data.size(); i++) {
+        f << src_data[i] << " ";
+    }
+    f << std::endl;
+    f.flush();
+    f.close();
 }
 
 int main(int argc, char **argv) {
     return handle_example_errors(
-            softmax_example, parse_engine_kind(argc, argv));
+            softmax_example, validate_engine_kind(dnnl::engine::kind::cpu));
 }
