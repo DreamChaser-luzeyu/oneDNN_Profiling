@@ -22,7 +22,9 @@ IN_FILE="$(pwd)/input/matmul.in" taskset -c 1 make matmul_nosve | grep Calculati
 IN_FILE="$(pwd)/input/matmul.in" taskset -c 1 make matmul_sve | grep Calculation
 # Batch matmul
 IN_FILE="$(pwd)/input/batchmm.in" taskset -c 1 make batchmm_nosve | grep Calculation
+IN_FILE="$(pwd)/input/batchmm.in" taskset -c 1 make batchmm_asimd | grep Calculation
 IN_FILE="$(pwd)/input/batchmm.in" taskset -c 1 make batchmm_sve | grep Calculation
+# Softmax
 IN_FILE="$(pwd)/input/softmax.in" taskset -c 1 make softmax_nosve | grep Calculation
 IN_FILE="$(pwd)/input/softmax.in" taskset -c 1 make softmax_sve | grep Calculation
 IN_FILE="$(pwd)/input/relu.in" taskset -c 1 make relu_nosve | grep Calculation
