@@ -20,10 +20,16 @@ For silent test
 # 2D Matmul
 IN_FILE="$(pwd)/input/matmul.in" taskset -c 1 make matmul_nosve | grep Calculation
 IN_FILE="$(pwd)/input/matmul.in" taskset -c 1 make matmul_sve | grep Calculation
-# Batch matmul
+# Batch matmul 128 128*128 128*128 matmul 
 IN_FILE="$(pwd)/input/batchmm.in" taskset -c 1 make batchmm_nosve | grep Calculation
 IN_FILE="$(pwd)/input/batchmm.in" taskset -c 1 make batchmm_asimd | grep Calculation
 IN_FILE="$(pwd)/input/batchmm.in" taskset -c 1 make batchmm_sve | grep Calculation
+
+# Batch matmul 110 110*110 110*110 matmul 
+IN_FILE="$(pwd)/input/batchmm_2.in" taskset -c 1 make batchmm_nosve | grep Calculation
+IN_FILE="$(pwd)/input/batchmm_2.in" taskset -c 1 make batchmm_asimd | grep Calculation
+IN_FILE="$(pwd)/input/batchmm_2.in" taskset -c 1 make batchmm_sve | grep Calculation
+
 # Softmax
 IN_FILE="$(pwd)/input/softmax.in" taskset -c 1 make softmax_nosve | grep Calculation
 IN_FILE="$(pwd)/input/softmax.in" taskset -c 1 make softmax_sve | grep Calculation
