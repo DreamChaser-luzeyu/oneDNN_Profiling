@@ -28,7 +28,9 @@ IN_FILE="$(pwd)/input/matsum.in" taskset -c 1 make matsum_sve | grep Calculation
 
 # Softmax
 IN_FILE="$(pwd)/input/softmax.in" taskset -c 1 make softmax_nosve | grep Calculation
+IN_FILE="$(pwd)/input/softmax.in" taskset -c 1 make softmax_asimd | grep Calculation
 IN_FILE="$(pwd)/input/softmax.in" taskset -c 1 make softmax_sve | grep Calculation
+
 IN_FILE="$(pwd)/input/relu.in" taskset -c 1 make relu_nosve | grep Calculation
 IN_FILE="$(pwd)/input/relu.in" taskset -c 1 make relu_sve | grep Calculation
 ```

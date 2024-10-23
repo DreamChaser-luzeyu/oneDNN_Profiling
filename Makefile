@@ -108,6 +108,16 @@ softmax_nosve : oneDNN_nosve.tar.gz
 	cmake --build ./.build --target softmax
 	./.build/softmax < $(IN_FILE)
 
+softmax_asimd : oneDNN_asimd.tar.gz
+	tar -zxf ./oneDNN_asimd.tar.gz
+	if [ -d "./oneDNN_install" ]; then rm -rf ./oneDNN_install; fi
+	mv ./install ./oneDNN_install
+	if [ -d "./.build" ]; then rm -rf ./.build; fi
+	mkdir ./.build
+	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
+	cmake --build ./.build --target softmax
+	./.build/softmax < $(IN_FILE)
+
 softmax_sve : oneDNN_sve.tar.gz
 	tar -zxf ./oneDNN_sve.tar.gz
 	if [ -d "./oneDNN_install" ]; then rm -rf ./oneDNN_install; fi
