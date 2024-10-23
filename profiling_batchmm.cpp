@@ -131,20 +131,21 @@ void matmul_example(dnnl::engine::kind engine_kind) {
     // Read data from memory object's handle.
     read_from_dnnl_memory(dst_data.data(), dst_mem);
 
-    std::cout << "[LOG] Dumping result..." << std::endl;
-
-    char str_buf[128];
-    char* build_arch_str = getenv("BUILD_ARCH");
-    strcpy(str_buf, "batchmm.out.");
-    const char* file_name_str = strcat(str_buf, build_arch_str);
-    std::fstream f;
-    f.open(file_name_str, std::ios::out);
-    for(int i=0; i<dst_data.size(); i++) {
-        f << dst_data[i] << " ";
+    if (getenv("BUILD_ARCH")) {
+        std::cout << "[LOG] Dumping result..." << std::endl;
+        char str_buf[128];
+        char* build_arch_str = getenv("BUILD_ARCH");
+        strcpy(str_buf, "batchmm.out.");
+        const char* file_name_str = strcat(str_buf, build_arch_str);
+        std::fstream f;
+        f.open(file_name_str, std::ios::out);
+        for (int i = 0; i < dst_data.size(); i++) {
+            f << dst_data[i] << " ";
+        }
+        f << std::endl;
+        f.flush();
+        f.close();
     }
-    f << std::endl;
-    f.flush();
-    f.close();
 }
 
 int main(int argc, char **argv) {
