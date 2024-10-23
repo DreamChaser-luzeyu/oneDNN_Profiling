@@ -47,8 +47,10 @@ void sum_example(dnnl::engine::kind engine_kind) {
             IH = 227, // tensor height
             IW = 227; // tensor width
 
-    std::cout << "[MATSUM] Please enter param N(Batch size), IC(Channel size), IH, IW: ";
-    std::cin >> N >> IC >> IH >> IW;
+    int num_src = 10;
+
+    std::cout << "[MATSUM] Please enter param N(Batch size), IC(Channel size), IH, IW, MatrixNum: ";
+    std::cin >> N >> IC >> IH >> IW >> num_src;
 
     // Source (src) and destination (dst) tensors dimensions.
     memory::dims src_dims = {N, IC, IH, IW};
@@ -59,12 +61,13 @@ void sum_example(dnnl::engine::kind engine_kind) {
 
     // Initialize src.
     std::generate(src_data.begin(), src_data.end(), []() {
-        static int i = 0;
-        return std::cos(i++ / 10.f);
+        // static int i = 0;
+        // return std::cos(i++ / 10.f);
+        return 1.0f;
     });
 
     // Number of src tensors.
-    const int num_src = 10;
+    
 
     // Scaling factors.
     std::vector<float> scales(num_src);
@@ -74,7 +77,6 @@ void sum_example(dnnl::engine::kind engine_kind) {
     // Create an array of memory descriptors and memory objects for src tensors.
     std::vector<memory::desc> src_md;
     std::vector<memory> src_mem;
-
     for (int n = 0; n < num_src; ++n) {
         auto md = memory::desc(src_dims, dt::f32, tag::nchw);
         auto mem = memory(md, engine);
