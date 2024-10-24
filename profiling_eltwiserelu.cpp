@@ -46,48 +46,42 @@ void eltwise_example(dnnl::engine::kind engine_kind) {
             IC = 3, // channels
             IH = 227, // tensor height
             IW = 227; // tensor width
-
     std::cout << "[RELU] Please enter param N(Batch size), IC, IH, IW:";
     std::cin >> N >> IC >> IH >> IW;
-    
     // Source (src) and destination (dst) tensors dimensions.
     memory::dims src_dims = {N, IC, IH, IW};
     memory::dims dst_dims = {N, IC, IH, IW};
-
     // Allocate buffers. In this example, out-of-place primitive execution is
     // demonstrated since both src and dst are required for later backward
     // propagation.
     std::vector<float> src_data(product(src_dims));
     std::vector<float> dst_data(product(dst_dims));
-
     // Initialize src tensor.
     std::generate(src_data.begin(), src_data.end(), []() {
         static int i = 0;
         return std::cos(i++ / 10.f);
     });
-
     // Create src and dst memory descriptors and memory objects.
     auto src_md = memory::desc(src_dims, dt::f32, tag::nchw);
     auto dst_md = memory::desc(dst_dims, dt::f32, tag::nchw);
     auto src_mem = memory(src_md, engine);
     auto dst_mem = memory(dst_md, engine);
-
     // Write data to memory object's handle.
     write_to_dnnl_memory(src_data.data(), src_mem);
 
+    // 3---- Create primitive
     // Create primitive descriptor.
     auto eltwise_pd = eltwise_forward::primitive_desc(engine,
             prop_kind::forward_training, algorithm::eltwise_relu, src_md,
             dst_md, 0.f, 0.f);
-
     // Create the primitive.
     auto eltwise_prim = eltwise_forward(eltwise_pd);
-
     // Primitive arguments.
     std::unordered_map<int, memory> eltwise_args;
     eltwise_args.insert({DNNL_ARG_SRC, src_mem});
     eltwise_args.insert({DNNL_ARG_DST, dst_mem});
 
+    // 4---- Do calc & profile time
     std::cout << "Start calculation" << std::endl;
     auto start = std::chrono::system_clock::now();
     // Primitive execution: element-wise (ReLU).

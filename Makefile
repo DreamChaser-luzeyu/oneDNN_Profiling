@@ -178,9 +178,29 @@ relu_nosve : oneDNN_nosve.tar.gz
 	mkdir ./.build
 	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
 	cmake --build ./.build --target relu
-	./.build/relu < $(IN_FILE)
+	BUILD_ARCH="nosimd" ./.build/relu < $(IN_FILE)
 
 relu_sve : oneDNN_sve.tar.gz
+	tar -zxf ./oneDNN_sve.tar.gz
+	if [ -d "./oneDNN_install" ]; then rm -rf ./oneDNN_install; fi
+	mv ./install ./oneDNN_install
+	if [ -d "./.build" ]; then rm -rf ./.build; fi
+	mkdir ./.build
+	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
+	cmake --build ./.build --target relu
+	BUILD_ARCH="sve" ./.build/relu < $(IN_FILE)	
+
+relu_nodump_nosve : oneDNN_nosve.tar.gz
+	tar -zxf ./oneDNN_nosve.tar.gz
+	if [ -d "./oneDNN_install" ]; then rm -rf ./oneDNN_install; fi
+	mv ./install ./oneDNN_install
+	if [ -d "./.build" ]; then rm -rf ./.build; fi
+	mkdir ./.build
+	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S. -B./.build
+	cmake --build ./.build --target relu
+	./.build/relu < $(IN_FILE)
+
+relu_nodump_sve : oneDNN_sve.tar.gz
 	tar -zxf ./oneDNN_sve.tar.gz
 	if [ -d "./oneDNN_install" ]; then rm -rf ./oneDNN_install; fi
 	mv ./install ./oneDNN_install
